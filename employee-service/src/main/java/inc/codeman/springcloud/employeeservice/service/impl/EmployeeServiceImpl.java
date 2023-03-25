@@ -2,6 +2,7 @@ package inc.codeman.springcloud.employeeservice.service.impl;
 
 import inc.codeman.springcloud.employeeservice.dto.EmployeeDto;
 import inc.codeman.springcloud.employeeservice.entity.Employee;
+import inc.codeman.springcloud.employeeservice.exception.ResourceNotFoundException;
 import inc.codeman.springcloud.employeeservice.repository.EmployeeRepository;
 import inc.codeman.springcloud.employeeservice.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -29,8 +30,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeDto getEmployeeById(Long id) {
-        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
-        Employee employee = optionalEmployee.get();
+        Employee employee = employeeRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Employee","id",id));
+        //Employee employee = optionalEmployee.get();
         //EmployeeDto employeeDto = new EmployeeDto(employee.getId(), employee.getFirstName(), employee.getLastName(), employee.getEmail());
         EmployeeDto employeeDto = modelMapper.map(employee,EmployeeDto.class);
         return employeeDto;

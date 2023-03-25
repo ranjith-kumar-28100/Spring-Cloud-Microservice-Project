@@ -2,6 +2,7 @@ package inc.codeman.springcloud.departmentservice.service.impl;
 
 import inc.codeman.springcloud.departmentservice.dto.DepartmentDto;
 import inc.codeman.springcloud.departmentservice.entity.Department;
+import inc.codeman.springcloud.departmentservice.exception.ResourceNotFoundException;
 import inc.codeman.springcloud.departmentservice.repository.DepartmentRepository;
 import inc.codeman.springcloud.departmentservice.service.DepartmentService;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentDto getDepartmentByCode(String code) {
-        Department department = departmentRepository.findByDepartmentCode(code);
+        Department department = departmentRepository.findByDepartmentCode(code).orElseThrow(()->new ResourceNotFoundException("Department","Department-Code",code));
         //DepartmentDto departmentDto = new DepartmentDto(department.getId(),department.getDepartmentName(),department.getDepartmentDescription(),department.getDepartmentCode());
         DepartmentDto departmentDto = modelMapper.map(department,DepartmentDto.class);
         return departmentDto;
