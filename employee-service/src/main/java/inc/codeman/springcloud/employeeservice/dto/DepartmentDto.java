@@ -1,4 +1,4 @@
-package inc.codeman.springcloud.departmentservice.dto;
+package inc.codeman.springcloud.employeeservice.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

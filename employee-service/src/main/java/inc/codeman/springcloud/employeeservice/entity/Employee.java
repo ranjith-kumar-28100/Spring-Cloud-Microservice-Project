@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="employees")
@@ -21,5 +21,6 @@ public class Employee {
     private String lastName;
     @Column(nullable = false,unique = true)
     private String email;
+    private String departmentCode;
 
 }

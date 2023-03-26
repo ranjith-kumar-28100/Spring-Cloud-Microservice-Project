@@ -1,8 +1,10 @@
 package inc.codeman.springcloud.departmentservice.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
+
+
 
 @Getter
 @Setter
@@ -12,7 +14,7 @@ import javax.persistence.*;
 @Table(name="departments")
 public class Department {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String departmentName;
     private String departmentDescription;
