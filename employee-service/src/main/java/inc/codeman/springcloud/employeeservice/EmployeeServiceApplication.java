@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
@@ -21,10 +22,11 @@ public class EmployeeServiceApplication {
 		return new ModelMapper();
 	}
 //
-//	@Bean
-//	public WebClient webClient(){
-//		return WebClient.builder().build();
-//	}
+	@Bean
+	@LoadBalanced
+	public WebClient.Builder webClientBuilder(){
+		return WebClient.builder();
+	}
 
 //	@Bean
 //	public RestTemplate restTemplate(){

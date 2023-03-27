@@ -26,7 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
    private ModelMapper modelMapper;
 //    private RestTemplate restTemplate;
 
-//    private WebClient webClient;
+//    private WebClient.Builder webClientBuilder;
     private APIClient apiClient;
     @Override
     public EmployeeDto save(EmployeeDto employeeDto) {
@@ -44,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         //Employee employee = optionalEmployee.get();
         //EmployeeDto employeeDto = new EmployeeDto(employee.getId(), employee.getFirstName(), employee.getLastName(), employee.getEmail());
         EmployeeDto employeeDto = modelMapper.map(employee,EmployeeDto.class);
-        //DepartmentDto departmentDto = webClient.get().uri("http://localhost:8080/api/departments/" + employeeDto.getDepartmentCode()).retrieve().bodyToMono(DepartmentDto.class).block();
+        //DepartmentDto departmentDto = webClientBuilder.build().get().uri("http://DEPARTMENT-SERVICE/api/departments/" + employeeDto.getDepartmentCode()).retrieve().bodyToMono(DepartmentDto.class).block();
         //ResponseEntity<DepartmentDto> departmentDto = restTemplate.getForEntity("http://localhost:8080/api/departments/" + employeeDto.getDepartmentCode(), DepartmentDto.class);
         DepartmentDto departmentDto = apiClient.getDepartmentWithDepartmentCode(employeeDto.getDepartmentCode());
         APIResponseDto apiResponseDto = new APIResponseDto(employeeDto,departmentDto);
